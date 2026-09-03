@@ -1,0 +1,41 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Licznik Kamstrup",
+        "description": "Wybierz urządzenie szeregowe podłączone do licznika lub wybierz „Wpisz ręcznie…”, aby podać ścieżkę.",
+        "data": {
+          "port": "Port szeregowy",
+          "name": "Nazwa"
+        }
+      },
+      "reconfigure": {
+        "title": "Zmień urządzenie szeregowe",
+        "description": "Wybierz nowe urządzenie szeregowe dla tego licznika lub wybierz „Wpisz ręcznie…”.",
+        "data": {
+          "port": "Port szeregowy",
+          "name": "Nazwa"
+        }
+      }
+    },
+    "error": {
+      "port": "Wybierz lub wpisz port szeregowy.",
+      "cannot_connect": "Nie można połączyć się z podanym portem szeregowym."
+    },
+    "abort": {
+      "already_configured": "Ten port szeregowy jest już skonfigurowany.",
+      "reconfigure_successful": "Urządzenie szeregowe licznika zostało pomyślnie zaktualizowane."
+    }
+  },
+  "options": {
+    "step": {
+      "user": {
+        "data": {
+          "scan_interval": "Interwał odpytywania (sekundy)",
+          "timeout": "Limit czasu odczytu szeregowego (sekundy)",
+          "baudrate": "Szybkość transmisji (bod)"
+        }
+      }
+    }
+  }
+}

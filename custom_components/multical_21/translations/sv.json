@@ -1,0 +1,41 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Kamstrup-mätare",
+        "description": "Välj den seriella enhet som är ansluten till din mätare, eller välj \"Ange manuellt…\" för att skriva in en sökväg.",
+        "data": {
+          "port": "Seriell port",
+          "name": "Namn"
+        }
+      },
+      "reconfigure": {
+        "title": "Byt seriell enhet",
+        "description": "Välj den nya seriella enheten för den här mätaren, eller välj \"Ange manuellt…\".",
+        "data": {
+          "port": "Seriell port",
+          "name": "Namn"
+        }
+      }
+    },
+    "error": {
+      "port": "Välj eller ange en seriell port.",
+      "cannot_connect": "Det gick inte att ansluta till den angivna seriella porten."
+    },
+    "abort": {
+      "already_configured": "Den här seriella porten är redan konfigurerad.",
+      "reconfigure_successful": "Mätarens seriella enhet har uppdaterats."
+    }
+  },
+  "options": {
+    "step": {
+      "user": {
+        "data": {
+          "scan_interval": "Avsökningsintervall (sekunder)",
+          "timeout": "Timeout för seriell läsning (sekunder)",
+          "baudrate": "Baudhastighet"
+        }
+      }
+    }
+  }
+}

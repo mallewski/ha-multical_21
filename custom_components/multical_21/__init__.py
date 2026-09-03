@@ -9,15 +9,19 @@ from datetime import timedelta
 import logging
 from typing import Any, List
 
+import serialx
+
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import CONF_PORT, CONF_SCAN_INTERVAL, CONF_TIMEOUT
+from homeassistant.const import CONF_NAME, CONF_PORT, CONF_SCAN_INTERVAL, CONF_TIMEOUT
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers.device_registry import DeviceEntryType, DeviceInfo
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .const import (
+    CONF_BAUDRATE,
     DEFAULT_BAUDRATE,
+    DEFAULT_NAME,
     DEFAULT_SCAN_INTERVAL,
     DEFAULT_TIMEOUT,
     DOMAIN,
@@ -38,31 +42,45 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         hass.data.setdefault(DOMAIN, {})
 
     port = entry.data.get(CONF_PORT)
+    name = entry.data.get(CONF_NAME) or DEFAULT_NAME
+
+    # Entries created before the unique_id/reconfigure support was added
+    # don't have a unique_id yet. Backfill it once so the entry keeps a
+    # stable device identity and multi-instance / reconfigure works.
+    if entry.unique_id is None:
+        hass.config_entries.async_update_entry(entry, unique_id=port)
     scan_interval_seconds = entry.options.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL)
     scan_interval = timedelta(seconds=scan_interval_seconds)
     timeout_seconds = entry.options.get(CONF_TIMEOUT, DEFAULT_TIMEOUT)
+    baudrate = entry.options.get(CONF_BAUDRATE, DEFAULT_BAUDRATE)
 
     _LOGGER.debug(
-        "Set up entry, with scan_interval of %s seconds and timeout of %s seconds",
+        "Set up entry, with scan_interval of %s seconds, timeout of %s seconds "
+        "and baudrate of %s",
         scan_interval_seconds,
         timeout_seconds,
+        baudrate,
     )
 
     # Initialize client in executor to avoid blocking the event loop
     try:
         client = await hass.async_add_executor_job(
-            _init_kamstrup_client, port, timeout_seconds
+            _init_kamstrup_client, port, timeout_seconds, baudrate
         )
     except Exception as exception:
         _LOGGER.error("Can't establish a connection with %s", port)
         raise ConfigEntryNotReady() from exception
 
+    # The device identity is tied to the config entry's unique_id/entry_id
+    # rather than the port path, so that changing the USB device via
+    # "Reconfigure" does not create a second, orphaned device in the
+    # device registry.
     device_info = DeviceInfo(
         entry_type=DeviceEntryType.SERVICE,
-        identifiers={(DOMAIN, port)},
+        identifiers={(DOMAIN, entry.unique_id or entry.entry_id)},
         manufacturer=MANUFACTURER,
         model=MODEL,
-        name=NAME,
+        name=name,
         sw_version=VERSION,
     )
 
@@ -99,9 +117,9 @@ async def async_reload_entry(hass, entry):
     await hass.config_entries.async_reload(entry.entry_id)
 
 
-def _init_kamstrup_client(port: str, timeout: int) -> Kamstrup:
+def _init_kamstrup_client(port: str, timeout: int, baudrate: int = DEFAULT_BAUDRATE) -> Kamstrup:
     """Initialize Kamstrup client in executor."""
-    return Kamstrup(port, DEFAULT_BAUDRATE, timeout)
+    return Kamstrup(port, baudrate, timeout)
 
 
 def _read_kamstrup_values(client: Kamstrup, commands: List[int]) -> dict:
@@ -151,9 +169,12 @@ class KamstrupUpdateCoordinator(DataUpdateCoordinator):
                 _read_kamstrup_values, self.kamstrup, self._commands
             )
         except Exception as exception:
-            # Check if it's a serial exception
-            exception_type = type(exception).__name__
-            if "Serial" in exception_type:
+            # serialx raises OSError/TimeoutError for connection issues
+            # (device unplugged, permission lost, no response in time) and
+            # serialx.SerialException for lower-level protocol/backend
+            # failures. pyserial used to lump all of these into one
+            # SerialException, so this replaces the old class-name check.
+            if isinstance(exception, (OSError, TimeoutError, serialx.SerialException)):
                 _LOGGER.error(
                     "Device disconnected or multiple access on port? \nException: %s",
                     exception,

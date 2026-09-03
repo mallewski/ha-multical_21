@@ -1,0 +1,41 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Kamstrup-Zähler",
+        "description": "Wähle das serielle Gerät aus, das mit deinem Zähler verbunden ist, oder wähle „Manuell eingeben…“, um einen Pfad einzugeben.",
+        "data": {
+          "port": "Serieller Port",
+          "name": "Name"
+        }
+      },
+      "reconfigure": {
+        "title": "Serielles Gerät ändern",
+        "description": "Wähle das neue serielle Gerät für diesen Zähler aus, oder wähle „Manuell eingeben…“.",
+        "data": {
+          "port": "Serieller Port",
+          "name": "Name"
+        }
+      }
+    },
+    "error": {
+      "port": "Bitte wähle einen seriellen Port aus oder gib einen ein.",
+      "cannot_connect": "Verbindung zum angegebenen seriellen Port nicht möglich."
+    },
+    "abort": {
+      "already_configured": "Dieser serielle Port ist bereits konfiguriert.",
+      "reconfigure_successful": "Das serielle Gerät des Zählers wurde erfolgreich aktualisiert."
+    }
+  },
+  "options": {
+    "step": {
+      "user": {
+        "data": {
+          "scan_interval": "Abfrageintervall (Sekunden)",
+          "timeout": "Timeout beim seriellen Lesen (Sekunden)",
+          "baudrate": "Baudrate"
+        }
+      }
+    }
+  }
+}

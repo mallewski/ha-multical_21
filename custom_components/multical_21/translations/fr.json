@@ -1,0 +1,41 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Compteur Kamstrup",
+        "description": "Sélectionnez le périphérique série connecté à votre compteur, ou choisissez « Saisir manuellement… » pour indiquer un chemin.",
+        "data": {
+          "port": "Port série",
+          "name": "Nom"
+        }
+      },
+      "reconfigure": {
+        "title": "Changer le périphérique série",
+        "description": "Sélectionnez le nouveau périphérique série pour ce compteur, ou choisissez « Saisir manuellement… ».",
+        "data": {
+          "port": "Port série",
+          "name": "Nom"
+        }
+      }
+    },
+    "error": {
+      "port": "Veuillez sélectionner ou saisir un port série.",
+      "cannot_connect": "Impossible de se connecter au port série indiqué."
+    },
+    "abort": {
+      "already_configured": "Ce port série est déjà configuré.",
+      "reconfigure_successful": "Le périphérique série du compteur a été mis à jour avec succès."
+    }
+  },
+  "options": {
+    "step": {
+      "user": {
+        "data": {
+          "scan_interval": "Intervalle de scan (secondes)",
+          "timeout": "Délai d'expiration de lecture série (secondes)",
+          "baudrate": "Débit en bauds"
+        }
+      }
+    }
+  }
+}

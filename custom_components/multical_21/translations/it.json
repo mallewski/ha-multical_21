@@ -1,0 +1,41 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Contatore Kamstrup",
+        "description": "Seleziona il dispositivo seriale collegato al tuo contatore, oppure scegli \"Inserisci manualmente…\" per digitare un percorso.",
+        "data": {
+          "port": "Porta seriale",
+          "name": "Nome"
+        }
+      },
+      "reconfigure": {
+        "title": "Cambia dispositivo seriale",
+        "description": "Seleziona il nuovo dispositivo seriale per questo contatore, oppure scegli \"Inserisci manualmente…\".",
+        "data": {
+          "port": "Porta seriale",
+          "name": "Nome"
+        }
+      }
+    },
+    "error": {
+      "port": "Seleziona o inserisci una porta seriale.",
+      "cannot_connect": "Impossibile connettersi alla porta seriale indicata."
+    },
+    "abort": {
+      "already_configured": "Questa porta seriale è già configurata.",
+      "reconfigure_successful": "Il dispositivo seriale del contatore è stato aggiornato correttamente."
+    }
+  },
+  "options": {
+    "step": {
+      "user": {
+        "data": {
+          "scan_interval": "Intervallo di scansione (secondi)",
+          "timeout": "Timeout di lettura seriale (secondi)",
+          "baudrate": "Velocità in baud"
+        }
+      }
+    }
+  }
+}

@@ -3,17 +3,28 @@
     "step": {
       "user": {
         "title": "Kamstrup meter",
-        "description": "Voer de seriële poort in die op de meter is aangesloten",
+        "description": "Selecteer het seriële apparaat dat op de meter is aangesloten, of kies \"Handmatig invoeren…\" om een pad in te typen.",
         "data": {
-          "port": "Seriële poort"
+          "port": "Seriële poort",
+          "name": "Naam"
+        }
+      },
+      "reconfigure": {
+        "title": "Seriële apparaat wijzigen",
+        "description": "Selecteer het nieuwe seriële apparaat voor deze meter, of kies \"Handmatig invoeren…\".",
+        "data": {
+          "port": "Seriële poort",
+          "name": "Naam"
         }
       }
     },
     "error": {
-      "port": "Kan geen verbinding maken met de opgegeven poort."
+      "port": "Selecteer of voer een seriële poort in.",
+      "cannot_connect": "Kan geen verbinding maken met de opgegeven poort."
     },
     "abort": {
-      "single_instance_allowed": "Slechts één instantie is toegestaan."
+      "already_configured": "Deze seriële poort is al geconfigureerd.",
+      "reconfigure_successful": "Het seriële apparaat van de meter is bijgewerkt."
     }
   },
   "options": {
@@ -21,7 +32,8 @@
       "user": {
         "data": {
           "scan_interval": "Scaninterval (seconden)",
-          "timeout": "Time-out voor serieel lezen (seconden)"
+          "timeout": "Time-out voor serieel lezen (seconden)",
+          "baudrate": "Baudrate"
         }
       }
     }

@@ -10,7 +10,7 @@
 import logging
 import math
 
-import serial
+import serialx
 
 from .const import ESCAPES, UNITS
 
@@ -22,7 +22,12 @@ class Kamstrup:
 
     def __init__(self, serial_port: str, baudrate: int, timeout: float):
         """Initialize"""
-        self.ser = serial.Serial(port=serial_port, baudrate=baudrate, timeout=timeout)
+        # serial_for_url() does not auto-open the port (unlike pyserial's
+        # Serial(port=...)), so open() must be called explicitly.
+        self.ser = serialx.serial_for_url(
+            serial_port, baudrate=baudrate, read_timeout=timeout
+        )
+        self.ser.open()
 
     @classmethod
     def _crc_1021(cls, message: tuple[int]) -> int:

@@ -1,0 +1,41 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Kamstrup-måler",
+        "description": "Vælg den serielle enhed, der er forbundet til din måler, eller vælg \"Indtast manuelt…\" for at skrive en sti.",
+        "data": {
+          "port": "Seriel port",
+          "name": "Navn"
+        }
+      },
+      "reconfigure": {
+        "title": "Skift seriel enhed",
+        "description": "Vælg den nye serielle enhed til denne måler, eller vælg \"Indtast manuelt…\".",
+        "data": {
+          "port": "Seriel port",
+          "name": "Navn"
+        }
+      }
+    },
+    "error": {
+      "port": "Vælg eller angiv en seriel port.",
+      "cannot_connect": "Kan ikke oprette forbindelse til den angivne serielle port."
+    },
+    "abort": {
+      "already_configured": "Denne serielle port er allerede konfigureret.",
+      "reconfigure_successful": "Målerens serielle enhed blev opdateret."
+    }
+  },
+  "options": {
+    "step": {
+      "user": {
+        "data": {
+          "scan_interval": "Scanningsinterval (sekunder)",
+          "timeout": "Timeout for seriel læsning (sekunder)",
+          "baudrate": "Baudrate"
+        }
+      }
+    }
+  }
+}

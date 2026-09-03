@@ -1,0 +1,41 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Medidor Kamstrup",
+        "description": "Selecciona el dispositivo serie conectado a tu medidor, o elige «Introducir manualmente…» para escribir una ruta.",
+        "data": {
+          "port": "Puerto serie",
+          "name": "Nombre"
+        }
+      },
+      "reconfigure": {
+        "title": "Cambiar dispositivo serie",
+        "description": "Selecciona el nuevo dispositivo serie para este medidor, o elige «Introducir manualmente…».",
+        "data": {
+          "port": "Puerto serie",
+          "name": "Nombre"
+        }
+      }
+    },
+    "error": {
+      "port": "Selecciona o introduce un puerto serie.",
+      "cannot_connect": "No se puede conectar con el puerto serie indicado."
+    },
+    "abort": {
+      "already_configured": "Este puerto serie ya está configurado.",
+      "reconfigure_successful": "El dispositivo serie del medidor se ha actualizado correctamente."
+    }
+  },
+  "options": {
+    "step": {
+      "user": {
+        "data": {
+          "scan_interval": "Intervalo de escaneo (segundos)",
+          "timeout": "Tiempo de espera de lectura serie (segundos)",
+          "baudrate": "Velocidad en baudios"
+        }
+      }
+    }
+  }
+}
