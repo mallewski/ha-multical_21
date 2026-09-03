@@ -3,10 +3,10 @@
   "name": "multical 21",
   "codeowners": ["@mallewski"],
   "config_flow": true,
+  "dependencies": ["usb"],
   "documentation": "https://github.com/mallewski/ha-multical_21/blob/main/README.md",
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/mallewski/ha-multical_21/issues",
-  "dependencies": ["usb"],
   "requirements": ["serialx"],
   "version": "2.2.6"
 }
