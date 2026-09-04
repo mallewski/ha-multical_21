@@ -61,4 +61,4 @@ logger:
   logs:
     custom_components.multical_21: debug
 ```
-M informaci贸n en la [p谩gina de la integraci贸n logger de Home Assistant](https://www.home-assistant.io/integrations/logger)
+M谩s informaci贸n en la [p谩gina de la integraci贸n logger de Home Assistant](https://www.home-assistant.io/integrations/logger)
